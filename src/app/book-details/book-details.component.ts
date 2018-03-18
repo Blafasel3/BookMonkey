@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Book, Thumbnail } from '../shared/book';
@@ -30,8 +30,8 @@ export class BookDetailsComponent implements OnInit {
 
   removeBook() {
     if (confirm('Do you really want to delete this book form the list?')) {
-      this.bookStoreService.remove(this.book)
-        .subscribe(response => this.router.navigate(['../'], { relativeTo: this.route}));
+      this.bookStoreService.remove(this.book.isbn)
+        .subscribe(response => this.router.navigate(['../'], { relativeTo: this.route }));
     }
   }
 

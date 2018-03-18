@@ -1,10 +1,10 @@
 <h1 class="ui header">Add a new book</h1>
-<form class="ui large form" #myForm="ngForm" (ngSumbit)="submitForm()" novalidate=true>
+<form class="ui large form" #myForm="ngForm" (ngSubmit)="submitForm()" novalidate=true>
 
   <div class="field">
     <label>Book title</label>
     <input name="title" [(ngModel)]="book.title" required>
-    <div *ngIf="errors.title" class="ui negative mssage">
+    <div *ngIf="errors.title" class="ui negative message">
       {{ errors.title }}
     </div>
   </div>
@@ -22,14 +22,14 @@
   <div class="field">
     <label>Published</label>
     <input type="date" name="published" [(ngModel)]="book.published" useValueAsDate required>
-    <div *ngIf="errors.published" class="ui negative mesage">
+    <div *ngIf="errors.published" class="ui negative message">
       {{ errors.published }}
     </div>
   </div>
   <div class="field">
     <label>Author</label>
-    <input name="author" [(ngModel)]="book.authors[0]" required>
-    <div *ngIf="errors.author" class="ui negative mesage">
+    <input name="authors" [(ngModel)]="book.authors[0]" required>
+    <div *ngIf="errors.authors" class="ui negative message">
       {{ errors.author }}
     </div>
   </div>
@@ -41,10 +41,10 @@
     <label>Image</label>
     <div class="two fields" ngModelGroup="thumbnail">
       <div class="field">
-        <input name="imageurl" [(ngModel)]="book.thumbnails[0].url" placeholder="httt//.example.org/img.jpg">
+        <input name="url" [(ngModel)]="book.thumbnails[0].url" placeholder="httt//.example.org/img.jpg">
       </div>
       <div class="field">
-        <input name="imagetitle" [(ngModel)]="book.thumbnails[0].title" placeholder="Image title">
+        <input name="title" [(ngModel)]="book.thumbnails[0].title" placeholder="Image title">
       </div>
     </div>
   </div>

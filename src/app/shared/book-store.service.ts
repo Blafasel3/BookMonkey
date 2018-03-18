@@ -16,16 +16,16 @@ export class BookStoreService {
   private headers: Headers = new Headers();
 
   constructor(private http: Http) {
-    this.headers.append('ContentType', 'application/json');
+    this.headers.append('Content-Type', 'application/json');
   }
 
   getBook(isbn): Observable<Book> {
     return this.http.get(`${this.api}/book/${isbn}`)
       .retry(3)
-      .map(response => response.json)
+      .map(response => response.json())
       .map(rawBook => BookFactory.fromObject(rawBook))
       .catch(this.errorHandler);
-   }
+  }
 
   getAll(): Observable<Array<Book>> {
     return this.http.get(`${this.api}/books`)
@@ -36,7 +36,7 @@ export class BookStoreService {
       ).catch(this.errorHandler);
   }
 
-  create(book: Book): Observable<any> {
+  insert(book: Book): Observable<any> {
     return this.http.post(`${this.api}/book`, JSON.stringify(book), { headers: this.headers }).catch(this.errorHandler);
   }
 
@@ -46,9 +46,9 @@ export class BookStoreService {
       .catch(this.errorHandler);
   }
 
-  remove(book: Book): Observable<any> {
+  remove(isbn: string): Observable<any> {
     return this.http
-      .delete(`${this.api}/book/${book.isbn}`)
+      .delete(`${this.api}/book/${isbn}`)
       .catch(this.errorHandler);
   }
 
