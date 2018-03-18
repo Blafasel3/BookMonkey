@@ -1,7 +1,52 @@
 <h1 class="ui header">Add a new book</h1>
-<form class="ui large form"
-  #myForm="ngForm"
-  (ngSumbit)="submitForm()"
-  novalidate=true>
+<form class="ui large form" #myForm="ngForm" (ngSumbit)="submitForm()" novalidate=true>
 
+  <div class="field">
+    <label>Book title</label>
+    <input name="title" [(ngModel)]="book.title" required>
+    <div *ngIf="errors.title" class="ui negative mssage">
+      {{ errors.title }}
+    </div>
+  </div>
+  <div class="field">
+    <label>Subtitle</label>
+    <input name="subtitle" [(ngModel)]="book.subtitle">
+  </div>
+  <div class="field">
+    <label>ISBN Number</label>
+    <input name="isbn" [(ngModel)]="book.isbn" required minlength="10" maxlength="13">
+    <div *ngIf="errors.isbn" class="ui negative message">
+      {{ errors.isbn }}
+    </div>
+  </div>
+  <div class="field">
+    <label>Published</label>
+    <input type="date" name="published" [(ngModel)]="book.published" useValueAsDate required>
+    <div *ngIf="errors.published" class="ui negative mesage">
+      {{ errors.published }}
+    </div>
+  </div>
+  <div class="field">
+    <label>Author</label>
+    <input name="author" [(ngModel)]="book.authors[0]" required>
+    <div *ngIf="errors.author" class="ui negative mesage">
+      {{ errors.author }}
+    </div>
+  </div>
+  <div class="field">
+    <label>Description</label>
+    <input name="description" [(ngModel)]="book.description" rows="3">
+  </div>
+  <div class="field">
+    <label>Image</label>
+    <div class="two fields" ngModelGroup="thumbnail">
+      <div class="field">
+        <input name="imageurl" [(ngModel)]="book.thumbnails[0].url" placeholder="httt//.example.org/img.jpg">
+      </div>
+      <div class="field">
+        <input name="imagetitle" [(ngModel)]="book.thumbnails[0].title" placeholder="Image title">
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="ui button" [disabled]="myForm.invalid">Submit</button>
 </form>
