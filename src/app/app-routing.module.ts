@@ -1,11 +1,10 @@
 import { NgModule, Component } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-/* Own imports */
-import { BookDetailsComponent } from './book-details/book-details.component';
-import { BookListComponent } from './book-list/book-list.component';
+import { CanNavigateToAdminGuard } from './can-navigate-to-admin.guard';
+import { AdminModule } from './admin/admin.module';
+import { BookModule } from './book/book.module';
 import { HomeComponent } from './home/home.component';
-import { BookFormComponent } from './book-form/book-form.component';
 
 
 const routes: Routes = [
@@ -20,20 +19,24 @@ const routes: Routes = [
   },
   {
     path: 'books',
-    component: BookListComponent
-  },
-  {
-    path: 'books/:isbn',
-    component: BookDetailsComponent
+    loadChildren: 'app/book/book.module#BookModule' // activates preloading (lazy loading)
   },
   {
     path: 'admin',
-    component: BookFormComponent
+    loadChildren: 'app/admin/admin.module#AdminModule', // activates preloading (lazy loading)
+    canActivate: [CanNavigateToAdminGuard]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules // loads modules part by part, but main module is loaded first
+  })],
+  exports: [
+    RouterModule
+  ],
+  providers: [
+    CanNavigateToAdminGuard
+  ]
 })
 export class AppRoutingModule { }

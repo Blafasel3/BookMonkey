@@ -62,6 +62,13 @@ export class BookStoreService {
       ).catch(this.errorHandler);
   }
 
+  exists(isbn: string): Observable<Boolean> {
+    return this.http
+      .get(`${this.api}/book/${isbn}`)
+      .map(response => response.json())
+      .catch(this.errorHandler);
+  }
+
   private errorHandler(error: Error | any): Observable<any> {
     return Observable.throw(error);
   }

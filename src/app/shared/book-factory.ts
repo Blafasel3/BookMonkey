@@ -10,7 +10,7 @@ export class BookFactory {
       rawBook.isbn,
       rawBook.title,
       rawBook.authors,
-      typeof (rawBook.publihsed) === 'string' ? new Date(rawBook.published) : rawBook.published,
+      typeof (rawBook.published) === 'string' ? new Date(rawBook.published) : rawBook.published,
       rawBook.subtitle,
       rawBook.rating,
       rawBook.thumbnails,
