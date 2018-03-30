@@ -10,7 +10,7 @@ import { Book } from '../shared/book';
   templateUrl: './home.component.html',
   styles: []
 })
-export class HomeComponent  {
+export class HomeComponent {
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
